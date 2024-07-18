@@ -33,8 +33,52 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+   let word = input.question("Let's play some scrabble! Enter a word to score: ");
+      
+      let score = oldScrabbleScorer(word);
+   
+   console.log(`Points for '${word}' : ${score}`);
 };
+
+function simpleScorer(word) {
+
+   return word.length;
+}
+
+function vowelBonusScorer(word) {
+   const vowels = 'aeiouAEIOU';
+   let score = 0;
+
+   for (let letter of word) {
+       if (vowels.includes(letter)) {
+           score += 3;
+       } else {
+           score += 1;
+       }
+   }
+
+   return score;
+}
+
+const scoringAlgorithms = [
+   {
+       name: 'Scrabble',
+       description: 'The traditional scoring algorithm',
+       scorerFunction: oldScrabbleScorer
+   },
+   {
+       name: 'Simple Score',
+       description: 'Each letter is worth 1 point',
+       scorerFunction: simpleScorer
+   },
+   {
+       name: 'Bonus Vowels',
+       description: 'Vowels are worth 3 pts, and consonants are 1 pt',
+       scorerFunction: vowelBonusScorer
+   }
+];
+
+
 
 let newPointStructure;
 
